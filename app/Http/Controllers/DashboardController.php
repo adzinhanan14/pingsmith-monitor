@@ -21,7 +21,9 @@ class DashboardController extends Controller
             ->get();
         $total = $team->monitors()->count();
         $up = $team->monitors()->where('status', 'UP')->count();
+        $down = $team->monitors()->where('status', 'DOWN')->count();
         $alertChannels = $team->alertChannels()->latest()->get();
+        $statusPage = \App\Models\StatusPage::where('team_id', $team->id)->first();
         $recentIncidents = $team->monitors()
             ->with('incidents')
             ->get()
@@ -30,6 +32,6 @@ class DashboardController extends Controller
             ->take(5)
             ->values();
 
-        return view('dashboard-new', compact('team', 'monitors', 'alertChannels', 'recentIncidents') + ['stats' => ['total' => $total, 'up' => $up, 'uptime' => $total ? round($up / $total * 100, 1) : 100]]);
+        return view('dashboard-new', compact('team', 'monitors', 'alertChannels', 'recentIncidents', 'statusPage') + ['stats' => ['total' => $total, 'up' => $up, 'down' => $down, 'uptime' => $total ? round($up / $total * 100, 1) : 100]]);
     }
 }

@@ -66,67 +66,80 @@
 
                     <!-- Navigation -->
                     <nav class="space-y-2 text-sm">
-                        <a href="{{ route('dashboard') }}" class="menu-item flex items-center justify-between gap-3 rounded-2xl border border-primary-500/30 bg-primary-500/10 px-4 py-3 font-medium text-primary-200">
+                        <a href="{{ route('dashboard') }}" class="menu-item flex items-center justify-between gap-3 rounded-2xl border border-primary-500/30 bg-primary-500/10 px-4 py-3 font-semibold text-primary-200 shadow-sm">
                             <span class="flex items-center gap-3">
-                                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="h-5 w-5 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
                                 </svg>
                                 Dashboard
                             </span>
-                            <span class="rounded-full bg-primary-500/20 px-2 py-0.5 text-[10px] font-medium">LIVE</span>
+                            <span class="rounded-full bg-primary-500/20 px-2 py-0.5 text-[10px] font-medium text-primary-300">LIVE</span>
                         </a>
 
-                        <a href="#monitors" onclick="document.getElementById('monitors-section').scrollIntoView({behavior: 'smooth'}); return false;" class="menu-item flex items-center gap-3 rounded-2xl px-4 py-3 text-slate-300 hover:bg-slate-700/50 hover:text-white">
-                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <a href="#monitors-section" onclick="scrollToSection('monitors-section'); return false;" class="menu-item flex items-center gap-3 rounded-2xl px-4 py-3 text-slate-300 hover:bg-slate-700/50 hover:text-white">
+                            <svg class="h-5 w-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                             </svg>
                             Monitors
-                            <span class="ml-auto rounded-full bg-slate-700 px-2 py-0.5 text-[10px]">{{ $monitors->count() }}</span>
+                            <span class="ml-auto rounded-full bg-slate-700 px-2 py-0.5 text-[10px] font-semibold text-slate-200">{{ $monitors->count() }}</span>
                         </a>
 
                         @if($team)
                         <a href="{{ route('analytics.index') }}" class="menu-item flex items-center gap-3 rounded-2xl px-4 py-3 text-slate-300 hover:bg-slate-700/50 hover:text-white">
-                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="h-5 w-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
                             </svg>
                             Analytics
                         </a>
                         @endif
 
-                        <a href="#alerts" class="menu-item flex items-center justify-between gap-3 rounded-2xl px-4 py-3 text-slate-300 hover:bg-slate-700/50 hover:text-white">
+                        <a href="#alerts-section" onclick="scrollToSection('alerts-section'); return false;" class="menu-item flex items-center justify-between gap-3 rounded-2xl px-4 py-3 text-slate-300 hover:bg-slate-700/50 hover:text-white">
                             <span class="flex items-center gap-3">
-                                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="h-5 w-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
                                 </svg>
                                 Alerts
                             </span>
-                            <span class="rounded-full bg-slate-700 px-2 py-0.5 text-[10px]">{{ $alertChannels->count() }}</span>
+                            <span class="rounded-full bg-slate-700 px-2 py-0.5 text-[10px] font-semibold text-slate-200">{{ $alertChannels->count() }}</span>
                         </a>
 
-                        <a href="#incidents" class="menu-item flex items-center justify-between gap-3 rounded-2xl px-4 py-3 text-slate-300 hover:bg-slate-700/50 hover:text-white">
+                        <a href="#incidents-section" onclick="scrollToSection('incidents-section'); return false;" class="menu-item flex items-center justify-between gap-3 rounded-2xl px-4 py-3 text-slate-300 hover:bg-slate-700/50 hover:text-white">
                             <span class="flex items-center gap-3">
-                                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="h-5 w-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
                                 </svg>
                                 Incidents
                             </span>
                             @if($recentIncidents->count() > 0)
-                                <span class="rounded-full bg-red-500/20 px-2 py-0.5 text-[10px] text-red-300">{{ $recentIncidents->count() }}</span>
+                                <span class="rounded-full bg-red-500/20 px-2 py-0.5 text-[10px] font-semibold text-red-300">{{ $recentIncidents->count() }}</span>
+                            @else
+                                <span class="rounded-full bg-slate-700 px-2 py-0.5 text-[10px] font-semibold text-slate-400">0</span>
                             @endif
                         </a>
                     </nav>
 
-                    <!-- Status Indicator -->
-                    <div class="mt-8 rounded-2xl border border-white/10 bg-slate-900/50 p-4">
-                        <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">System Status</p>
+                    <!-- Dynamic & Clickable System Status Indicator -->
+                    @php
+                        $statusUrl = isset($statusPage) ? route('status.show', $statusPage->slug) : route('status.show', 'demo-status');
+                        $isDown = isset($stats['down']) && $stats['down'] > 0;
+                    @endphp
+                    <a href="{{ $statusUrl }}" target="_blank" title="View Public Status Page" class="mt-8 block rounded-2xl border border-white/10 bg-slate-900/50 p-4 transition hover:border-white/20 hover:bg-slate-900/80">
+                        <div class="flex items-center justify-between">
+                            <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">System Status</p>
+                            <svg class="h-3.5 w-3.5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                            </svg>
+                        </div>
                         <div class="mt-3 flex items-center gap-2.5">
                             <div class="relative">
-                                <span class="absolute inline-flex h-3 w-3 animate-ping rounded-full bg-secondary-400 opacity-75"></span>
-                                <span class="relative inline-flex h-3 w-3 rounded-full bg-secondary-400"></span>
+                                <span class="absolute inline-flex h-3 w-3 animate-ping rounded-full {{ $isDown ? 'bg-red-400' : 'bg-secondary-400' }} opacity-75"></span>
+                                <span class="relative inline-flex h-3 w-3 rounded-full {{ $isDown ? 'bg-red-500' : 'bg-secondary-400' }}"></span>
                             </div>
-                            <span class="text-sm font-medium text-secondary-300">All Systems Operational</span>
+                            <span class="text-sm font-medium {{ $isDown ? 'text-red-300' : 'text-secondary-300' }}">
+                                {{ $isDown ? $stats['down'] . ' Service(s) Down' : 'All Systems Operational' }}
+                            </span>
                         </div>
-                    </div>
+                    </a>
 
                     <!-- User Menu -->
                     <div class="mt-auto pt-6">
@@ -326,7 +339,15 @@
                                                     <span class="inline-flex rounded-full px-3 py-1.5 text-xs font-medium {{ $monitor->status === 'UP' ? 'bg-secondary-500/10 text-secondary-300' : ($monitor->status === 'DOWN' ? 'bg-red-500/10 text-red-300' : 'bg-slate-700 text-slate-300') }}">
                                                         {{ $monitor->status }}
                                                     </span>
-                                                    <form method="POST" action="{{ route('web.monitors.destroy', $monitor) }}" onsubmit="return confirm('Delete this monitor?')">
+                                                    <form method="POST" action="{{ route('web.monitors.check', $monitor) }}" class="inline">
+                                                         @csrf
+                                                         <button type="submit" title="Check Now" class="rounded-lg border border-white/10 bg-slate-800 p-2 text-primary-400 transition hover:border-primary-500/30 hover:bg-primary-500/10 hover:text-primary-300">
+                                                             <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                                                             </svg>
+                                                         </button>
+                                                     </form>
+                                                     <form method="POST" action="{{ route('web.monitors.destroy', $monitor) }}" onsubmit="return confirm('Delete this monitor?')">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button class="rounded-lg border border-white/10 bg-slate-800 p-2 text-slate-400 transition hover:border-red-500/30 hover:bg-red-500/10 hover:text-red-400">
@@ -352,7 +373,7 @@
                             <!-- Sidebar Content -->
                             <div class="space-y-6">
                                 <!-- Recent Incidents -->
-                                <div class="rounded-2xl border border-white/10 bg-slate-900/50 p-6">
+                                <div id="incidents-section" class="rounded-2xl border border-white/10 bg-slate-900/50 p-6">
                                     <h2 class="mb-4 text-lg font-semibold text-white">Recent Incidents</h2>
                                     <div class="space-y-3">
                                         @forelse($recentIncidents->take(5) as $incident)
@@ -377,7 +398,7 @@
                                 </div>
 
                                 <!-- Alert Channels -->
-                                <div class="rounded-2xl border border-white/10 bg-slate-900/50 p-6">
+                                <div id="alerts-section" class="rounded-2xl border border-white/10 bg-slate-900/50 p-6">
                                     <div class="mb-4 flex items-center justify-between">
                                         <h2 class="text-lg font-semibold text-white">Alert Channels</h2>
                                         <button onclick="document.getElementById('addAlertForm').classList.toggle('hidden')" class="text-sm text-primary-400 hover:text-primary-300">
@@ -459,5 +480,16 @@
             </div>
         </main>
     </div>
+
+    <script>
+        function scrollToSection(sectionId) {
+            const el = document.getElementById(sectionId);
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                el.classList.add('ring-2', 'ring-primary-500');
+                setTimeout(() => el.classList.remove('ring-2', 'ring-primary-500'), 1500);
+            }
+        }
+    </script>
 </body>
 </html>
