@@ -125,10 +125,12 @@ class AnalyticsController extends Controller
     private function getIncidentsByMonitor($teamId, $dateRange)
     {
         return Monitor::where('team_id', $teamId)
+            ->whereHas('incidents', function ($query) use ($dateRange) {
+                $query->where('started_at', '>=', $dateRange);
+            })
             ->withCount(['incidents' => function ($query) use ($dateRange) {
                 $query->where('started_at', '>=', $dateRange);
             }])
-            ->having('incidents_count', '>', 0)
             ->orderByDesc('incidents_count')
             ->limit(10)
             ->get();
